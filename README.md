@@ -16,6 +16,7 @@ Prefer direct component entry points in application code:
 
 ```ts
 import { Button } from '@mintcd/design-system/button';
+import { Select } from '@mintcd/design-system/select';
 import { TextField } from '@mintcd/design-system/text-field';
 ```
 
@@ -32,6 +33,7 @@ import { Badge, Card } from '@mintcd/design-system';
 - `TextField`: labels, help text, validation, and icon slots
 - `Badge`: neutral and semantic statuses
 - `Card`: default, subtle, elevated, and selected surfaces
+- `Select`: accessible single-value selection with keyboard navigation and typeahead
 
 ## Principles
 

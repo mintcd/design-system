@@ -12,6 +12,7 @@
     "./button": "./button.ts",
     "./card": "./card.ts",
     "./icon-button": "./icon-button.ts",
+    "./select": "./select.ts",
     "./text-field": "./text-field.ts",
     "./tokens.css": "./styles/tokens.css"
   },
