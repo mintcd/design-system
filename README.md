@@ -19,6 +19,8 @@ import { Button } from '@mintcd/design-system/button';
 import { Latex } from '@mintcd/design-system/latex';
 import { Select } from '@mintcd/design-system/select';
 import { TextField } from '@mintcd/design-system/text-field';
+import { Panel, PanelBody, PanelHeader } from '@mintcd/design-system/panel';
+import { Toolbar, ToolbarGroup } from '@mintcd/design-system/toolbar';
 ```
 
 The convenience barrel is also ESM and tree-shakeable:
@@ -36,6 +38,8 @@ import { Badge, Card } from '@mintcd/design-system';
 - `Card`: default, subtle, elevated, and selected surfaces
 - `Latex`: inline and display math rendered with KaTeX
 - `Select`: accessible single-value selection with keyboard navigation and typeahead
+- `Toolbar`: default, subtle, and floating action-group layouts
+- `Panel`: structured default and glass side-panel surfaces
 
 ## Principles
 

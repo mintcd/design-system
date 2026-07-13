@@ -13,8 +13,10 @@
     "./card": "./card.ts",
     "./icon-button": "./icon-button.ts",
     "./latex": "./latex.ts",
+    "./panel": "./panel.ts",
     "./select": "./select.ts",
     "./text-field": "./text-field.ts",
+    "./toolbar": "./toolbar.ts",
     "./tokens.css": "./styles/tokens.css"
   },
   "scripts": {
