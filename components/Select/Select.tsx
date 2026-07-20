@@ -70,17 +70,22 @@ export function Select<T extends string = string>({
     return -1;
   }, [options]);
 
+  const getInitialActiveIndex = useCallback(() => (
+    selectedIndex >= 0 && !options[selectedIndex]?.disabled
+      ? selectedIndex
+      : findEnabledIndex(-1, 1)
+  ), [findEnabledIndex, options, selectedIndex]);
+
+  const openListbox = useCallback(() => {
+    setActiveIndex(getInitialActiveIndex());
+    setOpen(true);
+  }, [getInitialActiveIndex]);
+
   useEffect(() => {
     if (!open) return;
-
-    const initialIndex = selectedIndex >= 0 && !options[selectedIndex]?.disabled
-      ? selectedIndex
-      : findEnabledIndex(-1, 1);
-    setActiveIndex(initialIndex);
-
     const animationFrame = requestAnimationFrame(() => listRef.current?.focus());
     return () => cancelAnimationFrame(animationFrame);
-  }, [findEnabledIndex, open, options, selectedIndex]);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -174,11 +179,14 @@ export function Select<T extends string = string>({
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}
         disabled={disabled}
-        onClick={() => setOpen((current) => !current)}
+        onClick={() => {
+          if (open) setOpen(false);
+          else openListbox();
+        }}
         onKeyDown={(event) => {
           if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
             event.preventDefault();
-            setOpen(true);
+            openListbox();
           }
         }}
       >
