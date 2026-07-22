@@ -16,6 +16,7 @@ export type LatexMacros = Record<string, string>;
 
 export interface LatexProps {
   children: string;
+  allowHtml?: boolean;
   className?: string;
   style?: CSSProperties;
   delimiters?: ReadonlyArray<LatexDelimiter>;
@@ -147,11 +148,13 @@ function renderLatexInText(
   delimiters: ReadonlyArray<LatexDelimiter>,
   strict: boolean,
   macros: LatexMacros,
+  allowHtml: boolean,
 ): string {
   return splitAtDelimiters(text, delimiters)
     .map((fragment) => {
       if (fragment.type === 'text') {
-        return renderBareLatexInHtmlText(fragment.data, strict, macros);
+        const source = allowHtml ? fragment.data : escapeHtml(fragment.data);
+        return renderBareLatexInHtmlText(source, strict, macros);
       }
 
       return renderMathFragment(fragment.data, fragment.display, strict, macros);
@@ -217,12 +220,13 @@ function renderMathFragment(
     });
   } catch (error) {
     if (strict) throw error;
-    return data;
+    return escapeHtml(data);
   }
 }
 
 export function Latex({
   children,
+  allowHtml = false,
   className,
   style,
   delimiters = defaultLatexDelimiters,
@@ -239,6 +243,7 @@ export function Latex({
     delimiters,
     strict,
     allMacros,
+    allowHtml,
   );
   const shouldTruncate = style?.width !== undefined && style.height !== undefined;
 
